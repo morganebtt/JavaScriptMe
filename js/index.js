@@ -5,8 +5,21 @@ window.onload = function() {
         // FAITE EN SORTE QUE AU CLICK SUR LES BUTTONS POSSEDANT LA CLASS 'square-button-empty'
             // DE MASQUER LE LOGIN FORM POUR AFFICHER LE REGISTER FORM, ET INVERSEMENT <->
 
+    var buttons = document.getElementsByClassName("square-button-empty");
+    var connexionForm = document.getElementById ("connexion-form");
+    var registerForm = document.getElementById ("register-form");
 
-
+    for (var i=0; i<buttons.length; i++){
+        buttons[i].addEventListener("click", function(e){
+            if(e.target.getAttribute("data-form") ==0) {
+                connexionForm.style.display = "none";
+                registerForm.style.display = "flex";
+            }
+            else{connexionForm.style.display = "flex";
+            registerForm.style.display = "none";
+            }
+        })
+    }
 
 
 
