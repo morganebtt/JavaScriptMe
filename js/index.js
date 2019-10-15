@@ -1,5 +1,18 @@
 window.onload = function() {
 
+    class User {
+
+        constructor(username, email, password){
+            this.username = username;
+            this.email = email;
+            this.password = password;
+        }
+    
+        getUsername(){return this.username};
+        getEmail(){return this.username};
+        getPassword(){return this.usename};
+    }
+
     // --------------------- STEP 1 ---------------------
         // Par defaut le formulaire de connection est afficher, le formulaire d'inscription quand a lui est en 'display: none';
         // FAITE EN SORTE QUE AU CLICK SUR LES BUTTONS POSSEDANT LA CLASS 'square-button-empty'
@@ -40,9 +53,15 @@ window.onload = function() {
     var loginButton = document.getElementById("login");
 
     loginButton.addEventListener("click", function (){
-        for (let i=0; i<2; i++);
-        var x = loginButton[i].value;
-        console.log(x);
+        var form = document.getElementById("connexion-form");
+        var email = form[0].value;
+        var password = form[1].value;
+
+        var user = localStorage.getItem("user");
+        user = JSON.parse(user);
+
+        if(user.email == email && user.password == password);
+        window.location= "home.html";
     })
 
     signupButton.addEventListener("click", function (){
@@ -72,6 +91,9 @@ window.onload = function() {
             return false;
         }
 
+        var user = new User(username, email, password);
+        localStorage.setItem("user", JSON.stringify(user));
+
     })
 
 
@@ -91,6 +113,18 @@ window.onload = function() {
             // --> on utilise les données saisie du formulaire d'inscription pour setup les propriétés notre nouvelle 'User'
             // puis on stocke ce nouvelle objet utilisateurs dans le 'localStorage' sous la clé 'user'
 
+    //register
+        // var user = new User(username, email, password);
+        // this.localStorage.setitem("user", JSON.stringify);
+
+    //login
+        // var user = localStorage.getItem("user");
+        // user = JSON.parse(user);
+
+        // if(user.email == email && user.password == password);
+        //     window.location= "home.html";
+
+    // IL FAUT LE REMETTRE DANS LA FONCTION POUR TOUCHER LES VAR QUI SONT DEDANS
 
 
 
