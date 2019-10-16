@@ -34,13 +34,6 @@ window.onload = function() {
         })
     }
 
-    // buttons.addEventListener('click', function() {
-    //     connexionForm.classList.toggle('register-hide');
-    //     registerForm.classList.toggle('contact-form');
-    // })
-
-
-
 
     // --------------------- STEP 2 ----------------------
         // maintenant que l'on peut afficher nos 2 formulaires l'intéret serait maintenant qu'ils fonctionnent ! pour cela :
@@ -53,20 +46,33 @@ window.onload = function() {
     var loginButton = document.getElementById("login");
 
     loginButton.addEventListener("click", function (){
-        var form = document.getElementById("connexion-form");
-        var email = form[0].value;
-        var password = form[1].value;
+        var email = connexionForm[0].value;
+        var password = connexionForm[1].value;
 
         var user = localStorage.getItem("user");
         user = JSON.parse(user);
 
-        if(user.email == email && user.password == password);
-        window.location= "home.html";
+        if(user) {
+            if(user.email === email && user.password === password) {
+                window.location = "home.html";
+            } else { 
+                var paragraph = document.createElement("p");
+                paragraph.innerHTML = "wrong username or password";
+                var logdiv = document.getElementsByClassName("form-block")[1];
+                logdiv.appendChild(paragraph);
+            }
+        } else {
+            var paragraph = document.createElement("p");
+            paragraph.innerHTML = "Account does not exist, please register.";
+            var logdiv = document.getElementsByClassName("form-block")[1];
+            logdiv.appendChild(paragraph);
+        }
+
     })
 
-    signupButton.addEventListener("click", function (){
+    signupButton.addEventListener("click", function () {
         var username = registerForm[0].value;
-        if (username.length <5){
+        if (username.length < 5){
             alert ("Your password needs at least a minimum of 5 characters");
             return false;
         }
@@ -74,7 +80,7 @@ window.onload = function() {
         var email = registerForm[1].value;
 
         var password = registerForm[2].value;
-        if (password.length <8){
+        if (password.length < 8){
             alert ("Your password needs at least a minimum of 8 characters");
             return false;
         }
@@ -112,20 +118,6 @@ window.onload = function() {
             // 2. Modifier ensuite le code ci dessus pour qu'a l'instantation d'un nouvelle 'User' ---
             // --> on utilise les données saisie du formulaire d'inscription pour setup les propriétés notre nouvelle 'User'
             // puis on stocke ce nouvelle objet utilisateurs dans le 'localStorage' sous la clé 'user'
-
-    //register
-        // var user = new User(username, email, password);
-        // this.localStorage.setitem("user", JSON.stringify);
-
-    //login
-        // var user = localStorage.getItem("user");
-        // user = JSON.parse(user);
-
-        // if(user.email == email && user.password == password);
-        //     window.location= "home.html";
-
-    // IL FAUT LE REMETTRE DANS LA FONCTION POUR TOUCHER LES VAR QUI SONT DEDANS
-
 
 
 
