@@ -11,11 +11,6 @@ window.onload = function() {
 
 
 
-
-
-
-
-
         // --------------------- STEP 1 ---------------------
             // 1. FAITE EN SORTE DE POUVOIR INSTANCIER UN OBJET 'Article' A PARTIR DES DONNEES DE LA VARIABLE 'articles'
                 // exemple : var article = new Article(articles.title, articles.author, articles.publishedDate, articles.img, articles.content, articles.resumes);
@@ -23,9 +18,36 @@ window.onload = function() {
             // 1.2 DEFINIR DES GETTER/SETTER POUR CHAQUE PROPRIETES DE LA CLASS Article
                 // exemple : this.SetTitle = function(newTitle) { this.title = newTitle; } <----- ceci est un SETTER
 
+            class Article {
 
+                constructor(title, author, publishedDate, img, content, resumes){
+                    this.title = title;
+                    this.author = author;
+                    this.publishedDate = publishedDate;
+                    this.img = img;
+                    this.content = content;
+                    this.resumes= resumes;
+                }
 
+                getTitle(){return this.title};
+                getAuthor(){return this.author};
+                getPublishedDate(){return this.publishedDate};
+                getImg(){return this.img};
+                getContent(){return this.content};
+                getResumes(){return this.resumes};
 
+                SetTitle = function(newTitle) {this.title = newTitle;};
+                SetAuthor = function(newAuthor) {this.author = newAuthor;};
+                SetPublishedDate = function(newPublishedDate) {this.publishedDate = newPublishedDate;};
+                SetImg = function(newImg) {this.img = newImg;};
+                SetContent = function(newContent) {this.content = newContent;};
+                SetResumes = function(newResumes) {this.resumes = newResumes;};
+
+            }
+
+            var article = new Article(articles.title, articles.author, articles.publishedDate, articles.img, articles.content, articles.resumes);
+            console.log(article);
+                
 
 
 
