@@ -45,11 +45,8 @@ window.onload = function() {
 
             }
 
-            var article = new Article(articles.title, articles.author, articles.publishedDate, articles.img, articles.content, articles.resumes);
-            console.log(article);
-                
-
-
+            var article = new Article(articles[0].title, articles[0].author, articles[0].publishedDate, articles[0].img, articles[0].content, articles[0].resumes);
+            console.log(article);             
 
 
         // ------------------- STEP 2 ---------------------
