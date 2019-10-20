@@ -1,15 +1,38 @@
 window.onload = function() {
 
+    class User {
+
+        constructor(username, email, password){
+            this.username = username;
+            this.email = email;
+            this.password = password;
+        }
+    
+        getUsername(){return this.username};
+        getEmail(){return this.username};
+        getPassword(){return this.usename};
+    }
+
     // --------------------- STEP 1 ---------------------
         // Par defaut le formulaire de connection est afficher, le formulaire d'inscription quand a lui est en 'display: none';
         // FAITE EN SORTE QUE AU CLICK SUR LES BUTTONS POSSEDANT LA CLASS 'square-button-empty'
             // DE MASQUER LE LOGIN FORM POUR AFFICHER LE REGISTER FORM, ET INVERSEMENT <->
 
+    var buttons = document.getElementsByClassName("square-button-empty");
+    var connexionForm = document.getElementById ("connexion-form");
+    var registerForm = document.getElementById ("register-form");
 
-
-
-
-
+    for (var i=0; i<buttons.length; i++){
+        buttons[i].addEventListener("click", function(e){
+            if(e.target.getAttribute("data-form") ==0) {
+                connexionForm.style.display = "none";
+                registerForm.style.display = "flex";
+            }
+            else{connexionForm.style.display = "flex";
+            registerForm.style.display = "none";
+            }
+        })
+    }
 
 
     // --------------------- STEP 2 ----------------------
@@ -19,9 +42,65 @@ window.onload = function() {
             //  2. vérifier que le 'username' fait au moins 5 caracteres alphanumérique
             //  3. vérifier que le password fait au moins 8 caracteres et contient a minima une majuscule/minuscule ainsi qu'un entier (integer)
 
+    var signupButton = document.getElementById("signup");
+    var loginButton = document.getElementById("login");
 
+    loginButton.addEventListener("click", function (){
+        var email = connexionForm[0].value;
+        var password = connexionForm[1].value;
 
+        var user = localStorage.getItem("user");
+        user = JSON.parse(user);
 
+        if(user) {
+            if(user.email === email && user.password === password) {
+                window.location = "home.html";
+            } else { 
+                var paragraph = document.createElement("p");
+                paragraph.innerHTML = "wrong username or password";
+                var logdiv = document.getElementsByClassName("form-block")[1];
+                logdiv.appendChild(paragraph);
+            }
+        } else {
+            var paragraph = document.createElement("p");
+            paragraph.innerHTML = "Account does not exist, please register.";
+            var logdiv = document.getElementsByClassName("form-block")[1];
+            logdiv.appendChild(paragraph);
+        }
+
+    })
+
+    signupButton.addEventListener("click", function () {
+        var username = registerForm[0].value;
+        if (username.length < 5){
+            alert ("Your password needs at least a minimum of 5 characters");
+            return false;
+        }
+
+        var email = registerForm[1].value;
+
+        var password = registerForm[2].value;
+        if (password.length < 8){
+            alert ("Your password needs at least a minimum of 8 characters");
+            return false;
+        }
+
+        var pwd=/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/;
+        if (pwd.test(password) == false) {
+            alert("Password Should contain atleast One Number, One UpperCase and a lowercase letter");   
+            return false;
+        }
+
+        var passwordConfirm = registerForm[3].value;
+        if (password != passwordConfirm){
+            alert ("Passwords are not the same");
+            return false;
+        }
+
+        var user = new User(username, email, password);
+        localStorage.setItem("user", JSON.stringify(user));
+
+    })
 
 
     // --------------------- STEP 3 -------------------------
@@ -42,8 +121,6 @@ window.onload = function() {
 
 
 
-
-
     // --------------------- STEP 4 -------------------------
         // une fois nos saisies utilisateurs stocker dans des variables faite en sorte de :
         // A LA CONNEXION :
@@ -56,4 +133,4 @@ window.onload = function() {
             // 2. Si les données saisies correspondent a celles présentes dans le 'localStorage', rediriger l'utilisateur sur la page 'home.html'
 
 
-}
+};
