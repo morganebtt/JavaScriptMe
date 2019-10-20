@@ -20,33 +20,40 @@ window.onload = function() {
 
             class Article {
 
-                constructor(title, author, publishedDate, img, content, resumes){
+                constructor(id, title, author, publishedDate, img, content, resumes, tags){
+                    this.id = id;
                     this.title = title;
                     this.author = author;
                     this.publishedDate = publishedDate;
                     this.img = img;
                     this.content = content;
-                    this.resumes= resumes;
+                    this.resumes = resumes;
+                    this.tags = tags;
                 }
 
+                getId(){return this.id};
                 getTitle(){return this.title};
                 getAuthor(){return this.author};
                 getPublishedDate(){return this.publishedDate};
                 getImg(){return this.img};
                 getContent(){return this.content};
                 getResumes(){return this.resumes};
+                getTags(){return this.tags};
 
-                SetTitle = function(newTitle) {this.title = newTitle;};
-                SetAuthor = function(newAuthor) {this.author = newAuthor;};
-                SetPublishedDate = function(newPublishedDate) {this.publishedDate = newPublishedDate;};
-                SetImg = function(newImg) {this.img = newImg;};
-                SetContent = function(newContent) {this.content = newContent;};
-                SetResumes = function(newResumes) {this.resumes = newResumes;};
+                setId = function(newId) {this.id = newId};
+                setTitle = function(newTitle) {this.title = newTitle;};
+                setAuthor = function(newAuthor) {this.author = newAuthor;};
+                setPublishedDate = function(newPublishedDate) {this.publishedDate = newPublishedDate;};
+                setImg = function(newImg) {this.img = newImg;};
+                setContent = function(newContent) {this.content = newContent;};
+                setResumes = function(newResumes) {this.resumes = newResumes;};
+                setTags = function(newTags) {this.tags = newTags;};
 
             }
 
-            var article = new Article(articles[0].title, articles[0].author, articles[0].publishedDate, articles[0].img, articles[0].content, articles[0].resumes);
-            console.log(article);             
+            for (var i = 0; i < articles.length; i++){
+                var article = new Article(articles[i].id, articles[i].title, articles[i].author, articles[i].publishedDate, articles[i].img, articles[i].content, articles[i].resumes, articles[i].tags);
+                console.log(article);        
 
 
         // ------------------- STEP 2 ---------------------
@@ -77,9 +84,46 @@ window.onload = function() {
                      // articleBloc.append(articleTitle);
                      // etc.....
 
+            var section = document.getElementsByTagName('section')[0]; 
 
+            var articleBloc = document.createElement('article');
+            articleBloc.classList.add('article-preview');
+            articleBloc.setAttribute('data-id', article.getId());
+            section.appendChild(articleBloc);
 
+            var articleTitle = document.createElement('h2');
+            articleTitle.innerText = article.getTitle(); 
+            articleBloc.appendChild(articleTitle);
 
+            var articleBody = document.createElement('div');
+            articleBody.classList.add('article-preciew-body');
+            articleBloc.appendChild(articleBody);
+
+            var articleImg = document.createElement('div');
+            articleImg.classList.add('article-preview-img');
+            articleBody.appendChild(articleImg);
+
+            var img = document.createElement('img');
+            img.setAttribute('src', article.getImg());
+            articleImg.appendChild(img);
+
+            var articleContent = document.createElement('div');
+            articleContent.classList.add('article-preview-content');
+            articleBody.appendChild(articleContent);
+
+            var contentParagraph = document.createElement('p');
+            contentParagraph.innerText = article.getResumes();
+            articleContent.appendChild(contentParagraph);
+
+            var articleTags = document.createElement('div');
+            articleTags.classList.add('article-preview-tags');
+            articleBody.appendChild(articleTags);
+
+            var tagsParagraph = document.createElement('p');
+            tagsParagraph.innerText = article.getTags();
+            articleTags.appendChild(tagsParagraph);    
+            
+            console.log(section);
 
         // ------------------ STEP 3 -----------------------
             // AU CLICK SUR LA PREVIEW D'UN ARTICLE (l'elements html) REDIRIGER VERS LA PAGE 'article.html' --->
@@ -87,8 +131,28 @@ window.onload = function() {
                     // 'file:///C:/Users/brian/Desktop/JavascriptMe/article.html?id=1' <----
                         // --- La valeur du parametre id présent dans l'url doit correspondre a l'article clicker
 
+            }
 
-
+            var allArticles = document.querySelectorAll('article'); 
+            allArticles[0].addEventListener("click", function(){
+                    window.location = "article.html?id=1";
+            })
+            allArticles[1].addEventListener("click", function(){
+                    window.location = "article.html?id=2";
+            })
+            allArticles[2].addEventListener("click", function(){
+                    window.location = "article.html?id=3";
+            })
+            allArticles[3].addEventListener("click", function(){
+                    window.location = "article.html?id=4";
+            })
+            allArticles[4].addEventListener("click", function(){
+                    window.location = "article.html?id=5";
+            })
+            allArticles[5].addEventListener("click", function(){
+                    window.location = "article.html?id=6";
+            })
+            
 
 
     });
